@@ -70,6 +70,6 @@ public class Board {
 		if(!positionExists(posicao)) {
 			throw new BoardException("A posição não está no tabuleiro");
 		}
-		return piece(posicao) == null;
+		return piece(posicao) != null;
 	}
 }
