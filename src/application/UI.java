@@ -39,7 +39,7 @@ public class UI {
 			int linha = Integer.parseInt(s.substring(1));
 			return new ChessPosition(coluna, linha);
 		}catch(RuntimeException e){
-			throw new InputMismatchException("Erro ao ler ChessPosition. Os valores válidos são de a1 a h8.");
+			throw new InputMismatchException("Erro ao ler ChessPosition. Os valores v��lidos s��o de a1 a h8.");
 		}
 	}
 	
@@ -47,16 +47,30 @@ public class UI {
 		for(int k=0; k<pieces.length; k++) {
 			System.out.print((8 - k)+" ");
 			for(int j=0; j<pieces.length; j++) {
-				printPiece(pieces[k][j]);
+				printPiece(pieces[k][j], false);
 			}
 			System.out.println();
 		}
 		System.out.println("  a b c d e f g h");
 	}
 	
-	private static void printPiece(ChessPiece peca) {
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] movimentosPossiveis) {
+		for(int k=0; k<pieces.length; k++) {
+			System.out.print((8 - k)+" ");
+			for(int j=0; j<pieces.length; j++) {
+				printPiece(pieces[k][j], movimentosPossiveis[k][j]);
+			}
+			System.out.println();
+		}
+		System.out.println("  a b c d e f g h");
+	}
+	
+	private static void printPiece(ChessPiece peca, boolean colorirFundo) {
+		if(colorirFundo) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
 		if(peca == null) {
-			System.out.print("-");
+			System.out.print("-"+ANSI_RESET);
 		
 		}else {
 			if(peca.getColor() == Color.WHITE) {
