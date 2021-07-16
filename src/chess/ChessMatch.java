@@ -7,11 +7,23 @@ import chess.pieces.King;
 
 public class ChessMatch {
 
+	private int vez;
+	private Color jogadorAtual;
 	private Board board;
 	
 	public ChessMatch() {
 		this.board = new Board(8, 8);
+		this.vez = 1;
+		this.jogadorAtual = Color.WHITE;
 		this.initialSetup();
+	}
+	
+	public int getTurn() {
+		return this.vez;
+	}
+	
+	public Color getCurrentPlayer() {
+		return this.jogadorAtual;
 	}
 	
 	public ChessPiece[][] getPieces(){
@@ -36,6 +48,7 @@ public class ChessMatch {
 		validateSourcePosition(source);
 		validateTargetPosition(source, target);
 		Piece capturePeca = makeMove(source, target);
+		nextTurn();
 		return (ChessPiece) capturePeca;
 	}
 	
@@ -50,6 +63,9 @@ public class ChessMatch {
 		if(!board.thereIsAPiece(posicao)) {
 			throw new ChessException("Não há peça na posição de origem.");
 		}
+		if(jogadorAtual != ((ChessPiece) board.piece(posicao)).getColor()) {
+			throw new ChessException("A peça escolhida não é sua");
+		}
 		if(!board.piece(posicao).isThereAnyPossibleMove()) {
 			throw new ChessException("Não há movimentos possíveis para a peça escolhida");
 		}
@@ -59,6 +75,11 @@ public class ChessMatch {
 		if(!board.piece(source).possibleMove(target)) {
 			throw new ChessException("A peça escolhida não pode se mover para a posição de destino");
 		}
+	}
+	
+	private void nextTurn() {
+		vez++;
+		jogadorAtual = (jogadorAtual == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 	
 	private void placeNewPiece(char coluna, int linha, ChessPiece peca) {

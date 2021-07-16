@@ -1,4 +1,5 @@
 package application;
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.Color;
 import chess.ChessPosition;
@@ -39,8 +40,15 @@ public class UI {
 			int linha = Integer.parseInt(s.substring(1));
 			return new ChessPosition(coluna, linha);
 		}catch(RuntimeException e){
-			throw new InputMismatchException("Erro ao ler ChessPosition. Os valores v��lidos s��o de a1 a h8.");
+			throw new InputMismatchException("Erro ao ler ChessPosition. Os valores válidos são de a1 a h8.");
 		}
+	}
+	
+	public static void printMatch(ChessMatch chessMatch) {
+		printBoard(chessMatch.getPieces());
+		System.out.println();
+		System.out.println("Vez: "+chessMatch.getTurn());
+		System.out.println("Esperando jogador: "+chessMatch.getCurrentPlayer());
 	}
 	
 	public static void printBoard(ChessPiece[][] pieces) {
