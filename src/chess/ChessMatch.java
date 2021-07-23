@@ -80,10 +80,11 @@ public class ChessMatch {
 		return (ChessPiece) capturePeca;
 	}
 	
-	private Piece makeMove(Position source, Position target) {
-		Piece p = board.removePiece(source);
-		Piece capturarPeca = board.removePiece(target);
-		board.placePiece(p, target);
+	private Piece makeMove(Position origem, Position destino) {
+		ChessPiece p = (ChessPiece) board.removePiece(origem);
+		p.increaseMoveCount();
+		Piece capturarPeca = board.removePiece(destino);
+		board.placePiece(p, destino);
 		if(capturarPeca != null) {
 			pecasCapturadas.remove(capturarPeca);
 			pecasCapturadas.add(capturarPeca);
@@ -91,11 +92,12 @@ public class ChessMatch {
 		return capturarPeca;
 	}
 	
-	private void undoMove(Position source, Position target, Piece pecaCapturada) {
-		Piece p = board.removePiece(target);
-		board.placePiece(p, source);
+	private void undoMove(Position origem, Position destino, Piece pecaCapturada) {
+		ChessPiece p = (ChessPiece) board.removePiece(destino);
+		p.decreaseMoveCount();
+		board.placePiece(p, origem);
 		if(pecaCapturada != null) {
-			board.placePiece(pecaCapturada, target);
+			board.placePiece(pecaCapturada, destino);
 			pecasCapturadas.remove(pecaCapturada);
 			pecasNoTabuleiro.add(pecaCapturada);
 		}
