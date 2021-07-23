@@ -10,7 +10,7 @@ public class Position {
 		this.setColuna(coluna);
 	}
 	
-	public int getLinha() {
+	public int getRow() {
 		return this.linha;
 	}
 	
@@ -18,7 +18,7 @@ public class Position {
 		this.linha = linha;
 	}
 	
-	public int getColuna() {
+	public int getColumn() {
 		return this.coluna;
 	}
 	

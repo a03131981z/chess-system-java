@@ -22,55 +22,55 @@ public class King extends ChessPiece{
 
 	@Override
 	public boolean[][] possibleMoves() {
-		boolean [][]mat = new boolean[getBoard().getLinhas()][getBoard().getColunas()];
+		boolean [][]mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
 		Position p = new Position(0, 0);
 		
 		//Acima
-		p.setValues(posicao.getLinha() -1, posicao.getColuna());
+		p.setValues(posicao.getRow() -1, posicao.getColumn());
 		if (getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getLinha()][p.getColuna()] = true;
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
 		//Abaixo
-		p.setValues(posicao.getLinha() + 1, posicao.getColuna());
+		p.setValues(posicao.getRow() + 1, posicao.getColumn());
 		if(getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getLinha()][p.getColuna()] = true;
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
 		//Esquerda
-		p.setValues(posicao.getLinha(), posicao.getColuna() - 1);
+		p.setValues(posicao.getRow(), posicao.getColumn() - 1);
 		if(getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getLinha()][p.getColuna()] = true;
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
 		//Direito
-		p.setValues(posicao.getLinha(), posicao.getColuna() + 1);
+		p.setValues(posicao.getRow(), posicao.getColumn() + 1);
 		if(getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getLinha()][p.getColuna()] = true;
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
 		//noroeste
-		p.setValues(posicao.getLinha() - 1, posicao.getColuna() - 1);
+		p.setValues(posicao.getRow() - 1, posicao.getColumn() - 1);
 		if(getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getLinha()][p.getColuna()] = true;
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
 		//nordeste
-		p.setValues(posicao.getLinha() - 1, posicao.getColuna() + 1);
+		p.setValues(posicao.getRow() - 1, posicao.getColumn() + 1);
 		if(getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getLinha()][p.getColuna()] = true;
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
 		//sudoeste
-		p.setValues(posicao.getLinha() + 1, posicao.getColuna() - 1);
+		p.setValues(posicao.getRow() + 1, posicao.getColumn() - 1);
 		if(getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getLinha()][p.getColuna()] = true;
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
 		//sudeste
-		p.setValues(posicao.getLinha() + 1, posicao.getColuna() + 1);
+		p.setValues(posicao.getRow() + 1, posicao.getColumn() + 1);
 		if(getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getLinha()][p.getColuna()] = true;
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
 		return mat;
