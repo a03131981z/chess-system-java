@@ -94,6 +94,24 @@ public class ChessMatch {
 			pecasCapturadas.remove(capturarPeca);
 			pecasCapturadas.add(capturarPeca);
 		}
+		//Movimento especial Roque, ao lado do Rei
+		if(p instanceof King && destino.getColumn() == origem.getColumn() + 2) {
+			Position origemT = new Position(origem.getRow(), origem.getColumn() + 3); 
+			Position destinoT = new Position(origem.getRow(), origem.getColumn() + 1);
+			ChessPiece torre = (ChessPiece) board.removePiece(origemT);
+			board.placePiece(torre, destinoT);
+			torre.increaseMoveCount();
+		}
+		
+		//Movimento especial Roque, ao lado da Rainha
+		if(p instanceof King && destino.getColumn() == origem.getColumn() + 2) {
+			Position origemT = new Position(origem.getRow(), origem.getColumn() + 3); 
+			Position destinoT = new Position(origem.getRow(), origem.getColumn() + 1);
+			ChessPiece torre = (ChessPiece) board.removePiece(origemT);
+			board.placePiece(torre, destinoT);
+			torre.increaseMoveCount();
+		}
+		
 		return capturarPeca;
 	}
 	
@@ -191,7 +209,7 @@ public class ChessMatch {
 		placeNewPiece('b', 1, new Knight(board, Color.WHITE));
 		placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
 		placeNewPiece('d', 1, new Queen(board, Color.WHITE));
-	    placeNewPiece('e', 1, new King(board, Color.WHITE));
+	    placeNewPiece('e', 1, new King(board, Color.WHITE, this));
 	    placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
 	    placeNewPiece('g', 1, new Knight(board, Color.WHITE));
 	    placeNewPiece('h', 1, new Rook(board, Color.WHITE));
@@ -208,7 +226,7 @@ public class ChessMatch {
         placeNewPiece('b', 8, new Knight(board, Color.BLACK));
         placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
         placeNewPiece('d', 8, new Queen(board, Color.BLACK));
-	    placeNewPiece('e', 8, new King(board, Color.BLACK));
+	    placeNewPiece('e', 8, new King(board, Color.BLACK, this));
 	    placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
 	    placeNewPiece('g', 8, new Knight(board, Color.BLACK));
 	    placeNewPiece('h', 8, new Rook(board, Color.BLACK));
