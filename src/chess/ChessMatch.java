@@ -21,6 +21,7 @@ public class ChessMatch {
 	private boolean check;
 	private boolean checkMate;
 	private ChessPiece passoVulneravel;
+	private Piece capturarPeca;
 	
 	private List<Piece> pecasNoTabuleiro = new ArrayList<>();
 	private List<Piece> pecasCapturadas = new ArrayList<>();
@@ -89,6 +90,7 @@ public class ChessMatch {
 		}else {
 			nextTurn();
 		}
+		
 		//Movimento especial passante
 		if(movedPiece instanceof Pawn &&(target.getRow() == source.getRow() - 2 || target.getRow() == source.getRow() + 2)) {
 			passoVulneravel = movedPiece;
@@ -103,7 +105,7 @@ public class ChessMatch {
 	private Piece makeMove(Position origem, Position destino) {
 		ChessPiece p = (ChessPiece) board.removePiece(origem);
 		p.increaseMoveCount();
-		Piece capturarPeca = board.removePiece(destino);
+		capturarPeca = board.removePiece(destino);
 		board.placePiece(p, destino);
 		if(capturarPeca != null) {
 			pecasCapturadas.remove(capturarPeca);
@@ -126,7 +128,21 @@ public class ChessMatch {
 			board.placePiece(torre, destinoT);
 			torre.increaseMoveCount();
 		}
-		
+		//Movimento especial em passant
+		if(p instanceof Pawn) {
+			if(origem.getColumn() != destino.getColumn() && pecasCapturadas == null) {
+				Position pawnPosition;
+				if(p.getColor() == Color.WHITE) {
+					pawnPosition = new Position(destino.getRow() + 1, destino.getColumn());
+				
+				}else {
+					pawnPosition = new Position(destino.getRow() - 1, destino.getColumn());
+				}
+				capturarPeca = board.removePiece(pawnPosition);
+				pecasCapturadas.add(capturarPeca);
+				pecasNoTabuleiro.remove(capturarPeca);
+			}
+		}
 		return capturarPeca;
 	}
 	
@@ -156,6 +172,23 @@ public class ChessMatch {
 			ChessPiece torre = (ChessPiece) board.removePiece(destinoT);
 			board.placePiece(torre, origemT);
 			torre.decreaseMoveCount();
+		}
+		
+		//Movimento especial em passant
+		if(p instanceof Pawn) {
+			if(origem.getColumn() != destino.getColumn() && pecasCapturadas == passoVulneravel) {
+				ChessPiece pawn = (ChessPiece) board.removePiece(destino);
+				Position pawnPosition;
+				if(p.getColor() == Color.WHITE) {
+					pawnPosition = new Position(destino.getRow() + 1, destino.getColumn());
+				
+				}else {
+					pawnPosition = new Position(destino.getRow() - 1, destino.getColumn());
+				}
+			capturarPeca = board.removePiece(pawnPosition);
+			pecasCapturadas.add(capturarPeca);
+			pecasNoTabuleiro.remove(capturarPeca);
+			}
 		}
 	}
 	
