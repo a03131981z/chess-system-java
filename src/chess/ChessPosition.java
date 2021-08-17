@@ -1,37 +1,38 @@
 package chess;
-import board_game.Position;;
+
+import boardgame.Position;
 
 public class ChessPosition {
-
-	private char coluna;
-	private int linha;
 	
-	public ChessPosition(char coluna, int linha) {
-		if(coluna < 'a' || coluna > 'h' || linha < 1 || linha > 8) {
-			throw new ChessException("Erro ao instanciar ChessPosition. Os valores válidos são de a1 a h8");
+	private char column;
+	private int row;
+	
+	public ChessPosition(char column, int row) {
+		if (column < 'a' || column > 'h' || row < 1 || row > 8) {
+			throw new ChessException("Error instantiating ChessPosition. Valid values are from a1 to h8.");
 		}
-		this.coluna = coluna;
-		this.linha = linha;
+		this.column = column;
+		this.row = row;
 	}
-	
-	public char getColuna() {
-		return this.coluna;
+
+	public char getColumn() {
+		return column;
 	}
-	
-	public int getLinha() {
-		return this.linha;
+
+	public int getRow() {
+		return row;
 	}
-	
+
 	protected Position toPosition() {
-		return new Position(8 - linha, coluna - 'a');
+		return new Position(8 - row, column - 'a');
 	}
 	
-	protected static ChessPosition fromPosition(Position posicao) {
-		return new ChessPosition((char)('a' + posicao.getColumn()), 8 - posicao.getRow());
+	protected static ChessPosition fromPosition(Position position) {
+		return new ChessPosition((char)('a' + position.getColumn()), 8 - position.getRow());
 	}
 	
 	@Override
 	public String toString() {
-		return ""+this.coluna+this.linha;
+		return "" + column + row;
 	}
 }

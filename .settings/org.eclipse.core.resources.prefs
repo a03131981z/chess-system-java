@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/application/Program.java=UTF-8
 encoding//src/application/UI.java=UTF-8
-encoding//src/board_game/Board.java=UTF-8
+encoding//src/boardgame/Board.java=UTF-8
 encoding//src/chess/ChessMatch.java=UTF-8
 encoding//src/chess/ChessPosition.java=UTF-8

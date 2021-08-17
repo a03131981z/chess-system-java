@@ -1,40 +1,41 @@
 package chess;
-import board_game.Board;
-import board_game.Piece;
-import board_game.Position;
 
-public abstract class ChessPiece extends Piece{
+import boardgame.Board;
+import boardgame.Piece;
+import boardgame.Position;
+
+public abstract class ChessPiece extends Piece {
 
 	private Color color;
-	private int contagemMovimentos;
-	
+	private int moveCount;
+
 	public ChessPiece(Board board, Color color) {
 		super(board);
 		this.color = color;
 	}
 
 	public Color getColor() {
-		return this.color;
+		return color;
 	}
 	
 	public int getMoveCount() {
-		return this.contagemMovimentos;
+		return moveCount;
 	}
 	
 	public void increaseMoveCount() {
-		contagemMovimentos++;
+		moveCount++;
 	}
-	
+
 	public void decreaseMoveCount() {
-		contagemMovimentos--;
+		moveCount--;
 	}
-	
+
 	public ChessPosition getChessPosition() {
-		return ChessPosition.fromPosition(posicao);
+		return ChessPosition.fromPosition(position);
 	}
 	
-	protected boolean isThereOpponentPiece(Position posicao) {
-		ChessPiece p = (ChessPiece) getBoard().piece(posicao);
+	protected boolean isThereOpponentPiece(Position position) {
+		ChessPiece p = (ChessPiece)getBoard().piece(position);
 		return p != null && p.getColor() != color;
 	}
 }
